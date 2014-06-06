@@ -1,0 +1,6 @@
+{ 	"ip_addr": "127.0.0.1",
+	"port"   :  "8080",
+	"CouchServer" : "http://localhost:5984",
+	"DBname" : "leztok_db"
+
+}

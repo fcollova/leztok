@@ -1,0 +1,50 @@
+/*!
+ * leztok v0.01 (http://leztok.com)
+ * Copyright 2012 leztok.com
+ * Author Antonio Candela AKA @Delinet
+ */
+ 
+.lt-btn {
+	display: inline-block;
+  	padding: 6px 12px;
+  	margin-bottom: 0;
+  	font-size: 14px;
+  	font-weight: normal;
+  	line-height: 1.42857143;
+  	text-align: center;
+  	white-space: nowrap;
+  	vertical-align: middle;
+  	cursor: pointer;
+  	-webkit-user-select: none;
+      -moz-user-select: none;
+       -ms-user-select: none;
+           user-select: none;
+  	background-image: none;
+  	border: 0px solid transparent;
+  	border-radius: 20px;
+  	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+			  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+} 
+
+.lt-btn-selector {
+	width: 250px;
+	text-align: left;
+}
+
+.lt-btn-default {
+	color: #fff;
+	background-color: #428bca;
+}
+
+.lt-btn:hover,
+.lt-btn:focus {
+  color: #000;
+  background-color: #d9edf7;
+}
+
+.lt-btn-success {
+	color: #fff;
+	background-color: #00acee;
+}
+
