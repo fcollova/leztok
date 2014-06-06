@@ -49,19 +49,6 @@ server.use(restify.CORS());
 
 
 
-function format_msg_api(body,err){
-	var moment = require('moment');
-	date_format = moment().format("DD/MM/YYYY HH:mm:ss");
-	
-	//data_format= cdata.getFullYear() + '/' + cdata.getMonth() + '/' + cdata.getDate()
-	//+ ' ' + cdata.getHours()  +':' + cdata.getMinutes() + ':' + cdata.getSeconds();
-	var head = {date : date_format, error : err };
-	var msg = {head : head, data : body};
-	//console.log(msg);
-	return(msg);
-	
-};
-
 // Da modificare la POST
 function Post_ID_V1(req, res, next) {
 	var database = nano.use(con.DBname);
@@ -120,11 +107,13 @@ function Post_ID_V1(req, res, next) {
 //
 //
 //
+
+
+
 var PATH = '/api/Id/';
 //server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
 //server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
 //
-
 server.post({path: PATH + ':name', version: '1.0.0'}, Post_ID_V1);
 
 
