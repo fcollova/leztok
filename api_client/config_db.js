@@ -11,7 +11,6 @@ var db = nano.use(con.DBname);
 date_format = moment().format("DD/MM/YYYY HH:mm:ss");
 
 
-
 //set content-type header and data as json in args parameter
 var argvect = [
 
