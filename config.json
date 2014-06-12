@@ -1,7 +1,7 @@
 { 	
 	"ip_addr": "127.0.0.1",
 	"port"   :  "8080",
-	"CouchServer" : "http://localhost:5984",
+	"CouchServer" : "https://hiveapp.iriscouch.com/",
 	"DBname" : "leztok_db",
 	"Design_Query" : "leztok_design"
 

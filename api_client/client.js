@@ -181,12 +181,10 @@ client.put( con.CouchServer + "/" + con.DBname , function(data,response) {
 	// parsed response body as js object
     // raw response
     //console.log(response);
+    execute_DB(argvect,0);
 }).on('error',function(err){
     console.log('something went wrong on the request', err.request.options);
 });
-
-
-
 
 
 
@@ -216,12 +214,12 @@ function execute_DB(argvect,i) {
 		console.log(data);
 		// raw response
 		//console.log(response);
-		sleep.sleep(2);//sleep for 1 seconds
+		//sleep.sleep(2);//sleep for 1 seconds
 		execute_DB(argvect,i+1);
 		});  
 		return;
 };
-execute_DB(argvect,0);
+//execute_DB(argvect,0);
 
 // registering remote methods
 //client.registerMethod("postMethod", "http://localhost:5984", "POST");
