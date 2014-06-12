@@ -1,159 +1,145 @@
-#!/bin/env node
-//  OpenShift sample Node application
-var express = require('express');
-var fs      = require('fs');
-
-
 /**
- *  Define the sample application.
+ * @module app.js
+ * @author Francesco Collovà <francesco.collova@gmailcom>
+ * @copyright C&C aka leztok  2014
+ * @version 0.1
  */
-var SampleApp = function() {
-
-    //  Scope.
-    var self = this;
 
 
-    /*  ================================================================  */
-    /*  Helper functions.                                                 */
-    /*  ================================================================  */
-
-    /**
-     *  Set up server IP address and port # using env variables/defaults.
-     */
-    self.setupVariables = function() {
-        //  Set the environment variables we need.
-        self.ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-        self.port      = process.env.OPENSHIFT_NODEJS_PORT || 8080;
-
-        if (typeof self.ipaddress === "undefined") {
-            //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-            //  allows us to run/test the app locally.
-            console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
-            self.ipaddress = "127.0.0.1";
-        };
-    };
+var con = require('./config.json'); //Carica la configurazione
+var restify = require('restify');
+var custom_formatter = require('./lib/custom_formatter'); // ./lib Custom rensponse Formatter
+var nano = require('nano')(con.CouchServer);
+var util    = require('util');
 
 
-    /**
-     *  Populate the cache.
-     */
-    self.populateCache = function() {
-        if (typeof self.zcache === "undefined") {
-            self.zcache = { 'index.html': '' };
+// Openshift connection
+con.ip_addr = process.env.OPENSHIFT_NODEJS_IP   || con.ip_addr;
+con.port    = process.env.OPENSHIFT_NODEJS_PORT || con.port;
+
+//Couch Driver for URL router
+var Get_query_V1 = require('./lib/Get_query_V1');
+
+
+/*var nano = require('nano')(
+  { "url"             : "http://localhost:5984"
+  , "request_defaults" : { "proxy" : "http://someproxy" }
+  , "log"             : function (id, args) {
+      console.log(id, args);
+    }
+  });*/
+
+
+
+
+var server = restify.createServer({
+	  formatters: {
+		    'application/json': custom_formatter //Override default formatter for application/json 
+		  }
+		});
+
+
+/* FC
+The restify.queryParser() plugin is used to parse the HTTP query string (i.e., /jobs?skills=java,mysql).
+The parsed content will always be available in req.query.
+The restify.bodyParser() takes care of turning your request data into a JavaScript object on the server automatically.
+The restify.CORS() configures CORS (Cross Origin Resource Sharing) support in the application.
+*/
+
+server.use(restify.fullResponse());
+server.use(restify.queryParser());
+server.use(restify.bodyParser());
+server.use(restify.CORS());
+
+
+
+// Da modificare la POST
+function Post_ID_V1(req, res, next) {
+	var database = nano.use(con.DBname);
+	console.log('Try inserting on couch ID: ' + JSON.stringify(req.params.name) + JSON.stringify(req.body));
+	database.insert(req.body, function(err, body) {
+		if(!err){
+			res.charSet('UTF-8');
+			res.contentType = 'application/json';
+			res.send(200 , { Result :'OK'});
+         return next();
         }
-
-        //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
-    };
-
-
-    /**
-     *  Retrieve entry (content) from cache.
-     *  @param {string} key  Key identifying content to retrieve from cache.
-     */
-    self.cache_get = function(key) { return self.zcache[key]; };
-
-
-    /**
-     *  terminator === the termination handler
-     *  Terminate server on receipt of the specified signal.
-     *  @param {string} sig  Signal to terminate on.
-     */
-    self.terminator = function(sig){
-        if (typeof sig === "string") {
-           console.log('%s: Received %s - terminating sample app ...',
-                       Date(Date.now()), sig);
-           process.exit(1);
-        }
-        console.log('%s: Node server stopped.', Date(Date.now()) );
-    };
-
-
-    /**
-     *  Setup termination handlers (for exit and a list of signals).
-     */
-    self.setupTerminationHandlers = function(){
-        //  Process on exit and signals.
-        process.on('exit', function() { self.terminator(); });
-
-        // Removed 'SIGPIPE' from the list - bugz 852598.
-        ['SIGHUP', 'SIGINT', 'SIGQUIT', 'SIGILL', 'SIGTRAP', 'SIGABRT',
-         'SIGBUS', 'SIGFPE', 'SIGUSR1', 'SIGSEGV', 'SIGUSR2', 'SIGTERM'
-        ].forEach(function(element, index, array) {
-            process.on(element, function() { self.terminator(element); });
+        else{return next(err);}
         });
-    };
+}
 
-
-    /*  ================================================================  */
-    /*  App server functions (main app logic here).                       */
-    /*  ================================================================  */
-
-    /**
-     *  Create the routing table entries + handlers for the application.
-     */
-    self.createRoutes = function() {
-        self.routes = { };
-
-        self.routes['/asciimo'] = function(req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
-
-        self.routes['/'] = function(req, res) {
-            res.setHeader('Content-Type', 'text/html');
-            res.send(self.cache_get('index.html') );
-        };
-    };
-
-
-    /**
-     *  Initialize the server (express) and create the routes and register
-     *  the handlers.
-     */
-    self.initializeServer = function() {
-        self.createRoutes();
-        self.app = express.createServer();
-
-        //  Add handlers for the app (from the routes).
-        for (var r in self.routes) {
-            self.app.get(r, self.routes[r]);
-        }
-    };
-
-
-    /**
-     *  Initializes the sample application.
-     */
-    self.initialize = function() {
-        self.setupVariables();
-        self.populateCache();
-        self.setupTerminationHandlers();
-
-        // Create the express server and routes.
-        self.initializeServer();
-    };
-
-
-    /**
-     *  Start the server (starts up the sample application).
-     */
-    self.start = function() {
-        //  Start the app on the specific interface (and port).
-        self.app.listen(self.port, self.ipaddress, function() {
-            console.log('%s: Node server started on %s:%d ...',
-                        Date(Date.now() ), self.ipaddress, self.port);
-        });
-    };
-
-};   /*  Sample Application.  */
+// Rimpiazzato con la query "all_doc"
+//function Get_ID_V1(req, res, next) {
+//		var database = nano.use(con.DBname);
+//		console.log('Try reading on couch: ID');
+//		database.get(req.params.name, { revs_info: false }, function(err, body) {
+//		res.charSet('UTF-8');
+//		res.contentType = 'application/json';
+//		if(!err){
+//			msg_body_to_send = format_msg_api(body,err);
+//			res.send(200 , msg_body_to_send);
+//			return next();
+//			}
+//		else{
+//			msg_body_to_send = format_msg_api(body,err);
+//			res.send(200 , msg_body_to_send);
+//			//return next(err);
+//			return next();
+//			}
+//		}
+//);};
+//
+//function Get_list_ID_V1(req, res, next) {
+//		var database = nano.use(con.DBname);
+//		console.log('Try reading on couch: List ID');
+//		database.list( {include_docs: true, descending: true},function(err, body) {
+//		res.charSet('UTF-8');
+//		res.contentType = 'application/json';
+//		if(!err){
+//			msg_body_to_send = format_msg_api(body,err);
+//			res.send(200 , msg_body_to_send);
+//			return next();
+//			}
+//		else{
+//			msg_body_to_send = format_msg_api(body,err);
+//			res.send(200 , msg_body_to_send);
+//			//return next(err);
+//			return next();
+//			}
+//		}
+//);};
+//
+//
+//
 
 
 
-/**
- *  main():  Main code.
- */
-var zapp = new SampleApp();
-zapp.initialize();
-zapp.start();
+var PATH = '/api/Id/';
+//server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
+//server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
+//
+server.post({path: PATH + ':name', version: '1.0.0'}, Post_ID_V1);
 
+
+
+
+var VPATH = '/api/query/';
+server.get({path: VPATH + ':name', version: '1.0.0'}, Get_query_V1);
+
+
+
+
+server.get( /.*\..*/, restify.serveStatic({ directory: __dirname + '/static_folder'}));
+//server.get('/.+/', restify.serveStatic({ directory: __dirname + '/static_folder'}));
+//server.get(/\/.+/, restify.serveStatic({ directory: __dirname + '/static_folder'}));
+
+
+server.listen(con.port ,con.ip_addr, function(){
+
+	console.log('Current process directory is: ' + __dirname);
+    console.log('%s listening at %s \n', server.name , server.url);
+    console.log('Static Usage: ---> ' + server.url + '/lt_connect.html');
+    //console.log('API Usage: ------> '+ server.url + '/api/Id');
+    console.log('API Query Usage:-> ' + server.url + '/api/query/comments?key=Comment1');
+    
+});
