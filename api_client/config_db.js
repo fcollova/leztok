@@ -1,6 +1,12 @@
 
 var moment = require('moment');
-var con = require('../config.json'); //Carica la configurazione
+var con = require('../config.js'); //Carica la configurazione
+
+if (process.argv[2]){
+	console.log(process.argv[2]);
+	con.CouchServer = process.argv[2];
+	};
+
 var nano = require('nano')(con.CouchServer);
 
 
