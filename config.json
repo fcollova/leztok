@@ -3,6 +3,8 @@
 	"port"   :  "8080",
 	"CouchServer" : "http://localhost:5984",
 	"DBname" : "leztok_db",
-	"Design_Query" : "leztok_design"
+	"Design_Query" : "leztok_design",
+	"api_domain" : "leztokapp-leztok.rhcloud.com"
+	
 
 }
