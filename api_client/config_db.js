@@ -11,7 +11,10 @@ var db = nano.use(con.DBname);
 date_format = moment().format("DD/MM/YYYY HH:mm:ss");
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 96729536cea0b0690f395ecb4bb62a1ef328185c
 //set content-type header and data as json in args parameter
 var argvect = [
 
@@ -166,7 +169,11 @@ function execute_DB(argvect,i) {
 	else
 		argvect[i].data.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
 	    db.insert(argvect[i].data, function(err, body, header){
+<<<<<<< HEAD
 			console.log(err, body);
+=======
+			console.log(body);
+>>>>>>> 96729536cea0b0690f395ecb4bb62a1ef328185c
 			execute_DB(argvect,i+1);
 		});  
 		return;

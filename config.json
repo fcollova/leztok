@@ -1,4 +1,5 @@
 { 	
+<<<<<<< HEAD
 	"ip_addr": "127.0.0.1",
 	"port"   :  "8080",
 	"CouchServer" : "http://localhost:5984",
@@ -6,5 +7,13 @@
 	"Design_Query" : "leztok_design",
 	"api_domain" : "leztokapp-leztok.rhcloud.com"
 	
+=======
+	
+	"ip_addr": "127.0.0.1",
+	"port"   :  "8080",
+	"CouchServer" : "https://hiveapp.iriscouch.com/",
+	"DBname" : "leztok_db",
+	"Design_Query" : "leztok_design"
+>>>>>>> 96729536cea0b0690f395ecb4bb62a1ef328185c
 
 }
