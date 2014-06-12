@@ -13,18 +13,10 @@ var nano = require('nano')(con.CouchServer);
 var util    = require('util');
 
 
-<<<<<<< HEAD
 //Openshift connection
 con.ip_addr = process.env.OPENSHIFT_NODEJS_IP   || con.ip_addr;
 con.port    = process.env.OPENSHIFT_NODEJS_PORT || con.port;
 
-
-=======
-// Openshift connection
-con.ip_addr = process.env.OPENSHIFT_NODEJS_IP   || con.ip_addr;
-con.port    = process.env.OPENSHIFT_NODEJS_PORT || con.port;
-
->>>>>>> 96729536cea0b0690f395ecb4bb62a1ef328185c
 //Couch Driver for URL router
 var Get_query_V1 = require('./lib/Get_query_V1');
 

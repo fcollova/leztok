@@ -211,17 +211,11 @@ function execute_DB(argvect,i) {
 	else
 		argvect[i].data.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
 		client.post(con.CouchServer + "/" + con.DBname , argvect[i], function(data,response) {
-<<<<<<< HEAD
-		
-			console.log(data);
-			execute_DB(argvect,i+1);
-=======
 		console.log(data);
 		// raw response
 		//console.log(response);
 		//sleep.sleep(2);//sleep for 1 seconds
 		execute_DB(argvect,i+1);
->>>>>>> 96729536cea0b0690f395ecb4bb62a1ef328185c
 		});  
 		return;
 };
