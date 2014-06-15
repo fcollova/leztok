@@ -1,8 +1,8 @@
 {
   "name": "leztok",
-  "version": "0.0.0",
-  "description": "",
-  "main": "app.js",
+  "version": "0.1.0",
+  "description": "leztok ======",
+  "main": "server.js",
   "dependencies": {
     "moment": "^2.6.0",
     "nano": "^5.8.0",
@@ -12,7 +12,8 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",

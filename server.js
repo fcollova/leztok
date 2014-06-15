@@ -6,11 +6,13 @@
  */
 
 
-var con = require('./config.json'); //Carica la configurazione
+var con = require('./config.js'); //Carica la configurazione
 var restify = require('restify');
 var custom_formatter = require('./lib/custom_formatter'); // ./lib Custom rensponse Formatter
 var nano = require('nano')(con.CouchServer);
 var util    = require('util');
+
+
 
 
 //Couch Driver for URL router
