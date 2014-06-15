@@ -49,17 +49,21 @@
 }
 
 
+#circlemenu:hover,
+#circlemenu:focus {
+  color: #000;
+  background-color: #7F8C8D;
+}
+
 \***** Theme base box-model *****\
 
 body { padding-top: 90px; }
 
 .dimbox {
 	max-width: 700px;
-	padding:0;
 }
 .dimboxmenu {
 	max-width: 240px;
-	padding:0;
 }		
 
 .watchout {
@@ -73,9 +77,20 @@ body { padding-top: 90px; }
 	-webkit-transform: scale3d(1.0, 1.0, 1);
 }
 
+
+
 \***** Theme custom box-model *****\
 
 #view {
 	margin: 0;
 	padding: 0;
 }
+
+.zoomout {
+	-moz-transform: scale3d(0.0, 0.0, 1);
+	-webkit-transform: scale3d(0.0, 0.0, 1);
+	-moz-transition: all .3s linear;
+	-webkit-transition: all .3s linear;
+}	
+
+

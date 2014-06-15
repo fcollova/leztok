@@ -1,0 +1,21 @@
+{
+  "head": {
+    "date": "13/06/2014 04:56:42",
+    "error": {
+      "message": "error happened in your connection",
+      "stack": "Error: connect ECONNREFUSED\n    at errnoException (net.js:901:11)\n    at Object.afterConnect [as oncomplete] (net.js:892:19)",
+      "name": "Error",
+      "scope": "socket",
+      "errid": "request",
+      "code": "ECONNREFUSED",
+      "errno": "ECONNREFUSED",
+      "syscall": "connect",
+      "description": "connect ECONNREFUSED",
+      "stacktrace": [
+        "Error: connect ECONNREFUSED",
+        "    at errnoException (net.js:901:11)",
+        "    at Object.afterConnect [as oncomplete] (net.js:892:19)"
+      ]
+    }
+  }
+}

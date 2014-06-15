@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!-- Author: Antonio Candela AKA @Delinet -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Leztok</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Loading Bootstrap -->
+    <link href="lib/Flat-UI-master/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Loading Flat UI -->
+    <link href="lib/Flat-UI-master/css/flat-ui.css" rel="stylesheet">
+
+    <link rel="shortcut icon" href="lib/Flat-UI-master/images/favicon.ico">
+    
+    <!-- Font Awesome -->
+	 <link rel="stylesheet" href="lib/font-awesome-4.0.3/css/font-awesome.min.css">
+	 
+	 <!-- Google Fonts -->
+	 <link href='http://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+	 <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+	 <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	 
+	 <!-- leztok core CSS -->
+	 <link rel="stylesheet" href="css/lt-core.css">	
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="header">
+	 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	 		<div class="container">
+	 			<div class="row">
+  					<div class="col-xs-3"><button type="button" class="btn btn-link navbar-btn btn-xs" style="display:none" id="back"><i class="fa fa-angle-left fa-lg"></i></button></div>
+  					<div class="col-xs-6"><h5 class="text-center" style="font-family: 'Poiret One', cursive; font-size: 20px; color:#428bca;">Leztok</h5></div>
+  					<div class="col-xs-3" id="forward"></div>
+				</div> <!-- /row -->
+  			</div>
+		</nav> <!-- /navbar -->
+	 </div> <!-- /header -->
+	 
+	 <div id="content">
+	 
+	 	<div class="container dimbox" id="connect-panel" style="margin-top:70px;">
+			<div style="width:250px; margin-left:auto;margin-right:auto;margin-bottom:30px;padding:0;">
+				<form class="" role="form" action="lt_ui_home.html">
+        			<input type="email" class="form-control" style="margin-bottom:5px;" name="mail" placeholder="Indirizzo mail" required autofocus>
+        			<input type="password" class="form-control" name="psw" placeholder="Password" required>
+        			<button type="submit" class="center-block btn btn-info" style="margin-top:5px;">Entra</button>
+      		</form>
+				
+  				<button class="center-block btn btn-info btn-sm" style="margin-top:15px;margin-bottom:10px;margin-left:auto;margin-right:auto;"><i class="fa fa-twitter fa-lg" style="padding-right:10px;"></i>Connettiti con Twitter</button>
+				<button class="center-block btn btn-info btn-sm" style="margin-bottom:10px;margin-left:auto;margin-right:auto;"><i class="fa fa-facebook fa-lg" style="padding-right:10px;"></i>Connettiti con Facebook</button>
+				<div style="text-align:center;"><a href="#" id="register" style="font-family: 'Poiret One', cursive; font-size: 20px; color:#428bca;margin-top:20px;">Registrati</a></div>
+			</div>
+		 </div> <!-- /connect_panel -->
+		 
+	 </div> <!-- /content -->
+    
+    <div id="footer">	
+	 	 <nav class="navbar navbar-fixed-bottom" role="navigation">
+  		 	
+  		 </nav>	
+	 </div> <!-- /footer -->
+
+
+    <!-- Load JS here for greater good =============================-->
+    <!-- <script src="js/jquery-1.8.3.min.js"></script> -->
+    <script src="lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="lib/jquery/jquery.transit.min.js"></script>
+    <script src="lib/Flat-UI-master/js/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="lib/Flat-UI-master/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="lib/Flat-UI-master/js/bootstrap.min.js"></script>
+    <script src="lib/Flat-UI-master/js/bootstrap-select.js"></script>
+    <script src="lib/Flat-UI-master/js/bootstrap-switch.js"></script>
+    <script src="lib/Flat-UI-master/js/flatui-checkbox.js"></script>
+    <script src="lib/Flat-UI-master/js/flatui-radio.js"></script>
+    <script src="lib/Flat-UI-master/js/jquery.tagsinput.js"></script>
+    <script src="lib/Flat-UI-master/js/jquery.placeholder.js"></script>
+    
+    <script src="js/lt_corejs.js"></script>
+    
+    <script>
+    	$(document).ready(function(){
+    	
+    	
+			 
+		}); // .ready
+    </script>
+  </body>
+</html>
