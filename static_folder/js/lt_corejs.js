@@ -49,7 +49,7 @@
 												</div> \
   											</div> \
 										</div>',
-						api:'http://localhost/api/query/comments'
+						api:'http://127.0.0.1:8080/api/query/comments'
     				},
     				{
     					title:"content-discussions",
@@ -115,7 +115,7 @@
   											</div> \
 									</div>',
 						content_feed:'',
-						api:'http://localhost/api/query/discussions'	
+						api:'http://127.0.0.1:8080/api/query/discussions'	
     				}
     			]
     	};		
