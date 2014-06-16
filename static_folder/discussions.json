@@ -1,0 +1,46 @@
+{
+  "head": {
+    "date": "15/06/2014 14:27:59",
+    "error": null
+  },
+  "data": {
+    "total_rows": 2,
+    "offset": 0,
+    "rows": [
+      {
+        "id": "Discussion1",
+        "key": "Discussion1",
+        "value": {
+          "_id": "Discussion1",
+          "_rev": "1-9468b56313f877098fa369b44faccfe4",
+          "type": "Discussion",
+          "IdDiscussion": "Discussion1",
+          "Title": "La volta buona",
+          "IdCategory": "Category1",
+          "IdUser": 1,
+          "NumberComments": 2,
+          "NumberMale": 1,
+          "NumberFemale": 0,
+          "CreationDate": "12/06/2014 16:23:16"
+        }
+      },
+      {
+        "id": "Discussion2",
+        "key": "Discussion2",
+        "value": {
+          "_id": "Discussion2",
+          "_rev": "1-cf57ad70cce8467fa16b063676d5b983",
+          "type": "Discussion",
+          "IdDiscussion": "Discussion2",
+          "Title": "Startup Leztok",
+          "IdCategory": "Category1",
+          "IdUser": 1,
+          "NumberComments": 2,
+          "NumberMale": 2,
+          "NumberFemale": 0,
+          "CreationDate": "12/06/2014 16:24:23"
+        }
+      }
+    ]
+  }
+}

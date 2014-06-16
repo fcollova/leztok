@@ -49,7 +49,7 @@
 												</div> \
   											</div> \
 										</div>',
-						api:'http://leztokapp-leztok.rhcloud.com/api/query/comments'
+						api:'http://localhost/api/query/comments'
     				},
     				{
     					title:"content-discussions",
@@ -115,7 +115,7 @@
   											</div> \
 									</div>',
 						content_feed:'',
-						api:'file:///Users/kilroy/Documents/Project%28s%29/Project_LVB/discussions.json' //http://leztokapp-leztok.rhcloud.com/api/query/discussions'	
+						api:'http://localhost/api/query/discussions'	
     				}
     			]
     	};		
