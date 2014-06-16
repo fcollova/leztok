@@ -1,14 +1,14 @@
 {
   "name": "leztok",
   "version": "0.1.0",
-  "description": "leztok ======",
+  "description": "leztok app",
   "main": "server.js",
   "dependencies": {
-    "moment": "^2.6.0",
-    "nano": "^5.8.0",
-    "node-rest-client": "^0.8.6",
+    "moment": "^2.7.0",
+    "nano": "^5.10.0",
     "restify": "^2.8.1",
-    "sleep": "^1.1.5"
+    "sleep": "^1.1.8",
+    "node-rest-client": "^0.8.10"
   },
   "devDependencies": {},
   "scripts": {
@@ -17,8 +17,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@git.assembla.com:leztok.git"
+    "url": "git://github.com/fcollova/leztok.git"
   },
   "author": "C&C",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fcollova/leztok/issues"
+  },
+  "homepage": "https://github.com/fcollova/leztok"
 }
