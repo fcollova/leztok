@@ -25,7 +25,7 @@ if (typeof OS_ipaddress === "undefined") {
 else{
 		config.ip_addr = OS_ipaddress;
         config.port    = OS_port;
-        config.CouchServer = "https://hiveapp.iriscouch.com/";
+        config.CouchServer = "https://hiveapp.iriscouch.com:6984/";
 	};
 
 module.exports = config;
