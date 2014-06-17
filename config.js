@@ -9,10 +9,15 @@ var config = {
 				api_domain : "leztokapp-leztok.rhcloud.com"
 		};
 
+console.log("OS IP  : ", process.env.OPENSHIFT_NODEJS_IP);
+console.log("OS PORT: ", process.env.OPENSHIFT_NODEJS_PORT);
+console.log("------");
+
 if (process.env.OPENSHIFT_NODEJS_IP)
 {
 	config.CouchServer = "https://hiveapp.iriscouch.com/";
 };
+
 
 //Openshift connection
 config.ip_addr = process.env.OPENSHIFT_NODEJS_IP   || config.ip_addr;

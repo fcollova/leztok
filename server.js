@@ -7,6 +7,9 @@
 
 
 var con = require('./config.js'); //Carica la configurazione
+
+console.log("Configuration: " , con, "\n")
+
 var restify = require('restify');
 var custom_formatter = require('./lib/custom_formatter'); // ./lib Custom rensponse Formatter
 var nano = require('nano')(con.CouchServer);
