@@ -11,7 +11,7 @@
     "node-rest-client": "^0.8.10"
   },
   "engines": {
-    "node": ">= 0.10.28",
+    "node": ">= 0.10.9",
     "npm": ">= 1.0.0"
  },
   "devDependencies": {},
