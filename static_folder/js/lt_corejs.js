@@ -26,37 +26,10 @@
     				},
     				{
     				   title:"content-feed",
-    					type:"view",
+    					type:"modal",
     					func:true,
-    					template: '<!-- (start) hashtag buzz dashboard -->	\
-									  <div class="container bg-info navbar-fixed-top dimbox" style="margin-top:50px;"> \
-									  	<p style="margin-top:10px"><i class="fa fa-comments" style="margin-right:5px"></i><small>#TestTag</small><i class="fa fa-female pull-right" style="margin-right:5px;color:#E74C3C"><small> +100</small></i><i class="fa fa-male pull-right" style="margin-right:5px;color:#3498DB"><small> +1000</small></i></p> \
-									  </div> \
-									  <!-- / (end) hashtag buzz dashboard --> \
-									  <div id="content-feed"><\div>',
-    					content_feed:'<div class="panel panel-default" style="margin-top:5px"> \
-  										  	<div class="panel-body"> \
-												<div class="media"> \
-  													<a class="pull-left" href="#"> \
-    													<img class="media-object img-circle" src="http://placeimg.com/50/50/any" alt="..."> \
-  													</a> \
- 												   <div class="media-body"> \
-    													<p class="media-heading" style="color:#3498DB">Mark Zuckerberg</p> \
-    													<p><small>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam consequat, tortor nec aliquam facilisis, neque libero auctor mi, a vehicula</small></p> \
-    													<p><img src="http://lorempixel.com/400/200/technics/" class="img-rounded img-responsive" alt="Responsive image"></p> \
-														<p class="pull-right" style="color:#3498DB"><small><i class="fa fa-reply" style="margin-left:5px;margin-right:5px"></i><i class="fa fa-heart" style="margin-left:5px">  100</i></small></p> \
-  													</div> \
-												</div> \
-  											</div> \
-										</div>',
-						api:'http://127.0.0.1:8080/api/query/comments'
-    				},
-    				{
-    					title:"content-discussions",
-    					type:"view",
-    					func:true,
-    					func_code: function(api,template){
-    								  		console.log("Fetch content-discussions");
+    					func_code: function(api,template,content_feed,par){
+    								  		console.log("Fetch content-comments by discussion");
             							/*form_data = new FormData();
             							form_data.append('pks',PKS);
             							form_data.append('rating',rating_type);
@@ -82,6 +55,9 @@
                            									console.log("Error:" + json_list_item.head.error);
                            									if (json_list_item.head.error == null) {
                            									  console.log("Rows:" + json_list_item.data.rows.length);
+                           									  if (content_feed != "") {
+                           									  	 content_feed = content_feed.replace("");
+                           									  }
                            									  for (i=0;i<json_list_item.data.rows.length;i++) {
                            									  		template_to_add = template.replace("@discussion_title","#"+json_list_item.data.rows[i].value.Title);
                            									  		template_to_add = template_to_add.replace("@discussion_ncomment",json_list_item.data.rows[i].value.NumberComments);
@@ -108,19 +84,106 @@
     				
             							}); // <-- end ajax function
     								  },
+    					template: '<!-- (start) hashtag buzz dashboard -->	\
+									  <div class="container bg-info navbar-fixed-top dimbox" style="margin-top:50px;"> \
+									  	<p style="margin-top:10px"><i class="fa fa-comments" style="margin-right:5px"></i><small>@comment_titlediscussion</small><i class="fa fa-female pull-right" style="margin-right:5px;color:#E74C3C"><small>@comment_nfemale</small></i><i class="fa fa-male pull-right" style="margin-right:5px;color:#3498DB"><small>  @comment_nmale</small></i></p> \
+									  </div> \
+									  <!-- / (end) hashtag buzz dashboard --> \
+									  <div id="content-feed"><\div>',
+						func_add_elements:'',					  
+    					content_feed:'<div class="panel panel-default" style="margin-top:5px"> \
+  										  	<div class="panel-body"> \
+												<div class="media"> \
+  													<a class="pull-left" href="#"> \
+    													<img class="media-object img-circle" src="http://placeimg.com/50/50/any" alt="..."> \
+  													</a> \
+ 												   <div class="media-body"> \
+    													<p class="media-heading" style="color:#3498DB">@comment_username</p> \
+    													<p><small>@comment_txt</small></p> \
+    													<p><img src="http://lorempixel.com/400/200/technics/" class="img-rounded img-responsive" alt="Responsive image"></p> \
+														<p class="pull-right" style="color:#3498DB"><small><i class="fa fa-reply" style="margin-left:5px;margin-right:5px"></i><i class="fa fa-heart" style="margin-left:5px">  @comment_nlike</i></small></p> \
+  													</div> \
+												</div> \
+  											</div> \
+										</div>',
+						api:'ile:///Users/kilroy/Documents/Project(s)/Project_LVB/comments.json' //'http://127.0.0.1:8080/api/query/comments'
+    				},
+    				{
+    					title:"content-discussions",
+    					type:"view",
+    					func:true,
+    					func_code: function(api,template,content_feed,par){
+    								  		console.log("Fetch content-discussions");
+            							/*form_data = new FormData();
+            							form_data.append('pks',PKS);
+            							form_data.append('rating',rating_type);
+            							form_data.append('item_id',item_id);*/
+    										/* Start loader alert box */
+            							/* End loader alert box */   
+            
+            							ajax_url = api; 
+            							$.ajax({
+            									// the URL for the request
+    												url: ajax_url,
+   												// the data to send (will be converted to a query string)
+    												/*data: form_data, to set - case POST */
+    												type: "GET",
+    												dataType : "json",
+               								contentType: false,
+    												processData: false,
+               	     
+               								success: function( json ) { // this function parameter is the returned dataType
+                           									json_list_item = json
+                           									content_string = "";
+                           									console.log(json_list_item);
+                           									console.log("Error:" + json_list_item.head.error);
+                           									if (json_list_item.head.error == null) {
+                           									  console.log("Rows:" + json_list_item.data.rows.length);
+                           									  if (content_feed != "") {
+                           									  	 content_feed = content_feed.replace("");
+                           									  }
+                           									  for (i=0;i<json_list_item.data.rows.length;i++) {
+                           									  		template_to_add = template.replace("@discussion_title","#"+json_list_item.data.rows[i].value.Title);
+                           									  		template_to_add = template_to_add.replace("@discussion_title","#"+json_list_item.data.rows[i].value.Title);
+                           									  		template_to_add = template_to_add.replace("@discussion_ncomment",json_list_item.data.rows[i].value.NumberComments);
+                           									  		template_to_add = template_to_add.replace("@discussion_nmale",json_list_item.data.rows[i].value.NumberMale);
+                           									  		template_to_add = template_to_add.replace("@discussion_nfemale",json_list_item.data.rows[i].value.NumberFemale);
+                           									  		content_string += template_to_add;
+                           									  }
+                           									  
+                           									  $('#content').transition({ scale: 0.0 }, function(){
+																		  		$('#content').html(content_string);
+																				$('#content').transition({ scale: 1.0 });
+																		  });
+                           									}
+                      									},
+    					
+    												error: function( xhr, status ) {
+                      											console.log('ERROR');
+                      											console.log(status);
+                      	 								},
+               
+               								complete: function( xhr, status ) {
+                           									console.log('Complete');         
+                         								}
+    				
+            							}); // <-- end ajax function
+    								  },
     					template:'<div class="panel panel-default" style="margin-top:5px"> \
-  										<div class="panel-heading">@discussion_title</div> \
+  										<div class="panel-heading">@discussion_title <button class="btn btn-default btn-sm pull-right" href="#" id="@discussion_title" current_view="content-discussions" modal_view="content-feed"><i class="fa fa-chevron-right"></i></button></div> \
   											<div class="panel-body"> \
-    											<i class="fa fa-comments" style="margin-right:5px"></i><small>@discussion_ncomment</small><i class="fa fa-female pull-right" style="margin-right:5px;color:#E74C3C"><small>@discussion_nfemale</small></i><i class="fa fa-male pull-right" style="margin-right:5px;color:#3498DB"><small>@discussion_nmale</small></i> \
+    											<i class="fa fa-comments" style="margin-right:5px"></i><small>@discussion_ncomment</small><i class="fa fa-female pull-right" style="margin-right:5px;color:#E74C3C"><small> @discussion_nfemale</small></i><i class="fa fa-male pull-right" style="margin-right:5px;color:#3498DB"><small> @discussion_nmale</small></i> \
   											</div> \
 									</div>',
+						func_add_elements:'',			
 						content_feed:'',
-						api:'http://127.0.0.1:8080/api/query/discussions'	
+						api:'file:///Users/kilroy/Documents/Project(s)/Project_LVB/discussions.json' //'http://127.0.0.1:8080/api/query/discussions'	
     				}
     			]
     	};		
-		
-	view_obj.show_view = function(view_name){
+
+/***************** View management - Show view, modal *****************************/		
+	view_obj.show_view = function(view_name,par){
 	   console.log("Search for:" + view_name + " on " + view_obj.views.length + " views");
 		flag = false;
 		for (i=0;i<view_obj.views.length;i++){
@@ -136,7 +199,11 @@
 			// Start view rendering process
 			console.log("Start view:" + view.title + " rendering process");
 			if (view.func) {
-				view.func_code(view.api,view.template);
+				view.func_code(view.api,view.template,view.content_feed,par);
+				if (view.type == "modal") {
+					$('#back').show();
+					view_stack.unshift($('#content').html()); // set the view stack as the current content div html
+			   }
 			}
 			
 		}
@@ -146,8 +213,16 @@
 		
 	
 	}; // .show_view
+	
+	
+	$("#content").on("click","button",function(){
+		$('#content').transition({ scale: 0.0 }, function(){
+			console.log("ACTION: Changing view");
+			view_obj.show_view("content-feed",2);
+		});			
+	});
 		 
-/***************** Menu' animation *****************************/
+/***************** Connect page management *****************************/
 	$("#content").on("click","#register",function(){
 		$('#content').transition({ scale: 0.0 }, function(){
 			console.log("principal");
@@ -180,7 +255,8 @@
 	};
 	
 	
-/***************** Main menù management ***********************/
+	
+/***************** Main menù animation ***********************/
 
 	menu_is_out = 0;
 					
