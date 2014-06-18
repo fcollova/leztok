@@ -20,6 +20,9 @@ var util    = require('util');
 
 //Couch Driver for URL router
 var Get_query_V1 = require('./lib/Get_query_V1');
+var Post_ID_V1 = require('./lib/Post_ID_V1');
+
+
 
 
 /*var nano = require('nano')(
@@ -54,20 +57,6 @@ server.use(restify.CORS());
 
 
 
-// Da modificare la POST
-function Post_ID_V1(req, res, next) {
-	var database = nano.use(con.DBname);
-	console.log('Try inserting on couch ID: ' + JSON.stringify(req.params.name) + JSON.stringify(req.body));
-	database.insert(req.body, function(err, body) {
-		if(!err){
-			res.charSet('UTF-8');
-			res.contentType = 'application/json';
-			res.send(200 , { Result :'OK'});
-         return next();
-        }
-        else{return next(err);}
-        });
-}
 
 // Rimpiazzato con la query "all_doc"
 //function Get_ID_V1(req, res, next) {
@@ -115,7 +104,7 @@ function Post_ID_V1(req, res, next) {
 
 
 
-var PATH = '/api/Id/';
+var PATH = '/api/insert/';
 //server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
 //server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
 //
@@ -142,5 +131,7 @@ server.listen(con.port ,con.ip_addr, function(){
     console.log('Static Usage: ---> ' + server.url + '/lt_connect.html');
     //console.log('API Usage: ------> '+ server.url + '/api/Id');
     console.log('API Query Usage:-> ' + server.url + '/api/query/comments?key=Comment1');
+    console.log('API Query Usage:-> ' + server.url + 'POST  /api/insert/<_id>   <dati nel body: json>');
+
     
 });
