@@ -7,11 +7,15 @@ if (process.argv[2]){
 	con.CouchServer = process.argv[2];
 	};
 
-var nano = require('nano')(con.CouchServer);
+var nanodb = require('nano')(con.CouchServer);
+var nanores = require('nano')(con.CouchServer);
 
 
-nano.db.create(con.DBname);
-var db = nano.use(con.DBname);
+nanodb.db.create(con.DBname);
+nanores.db.create(con.DBresource);
+
+var db = nanodb.use(con.DBname);
+var dbres = nanores.use(con.DBresource);
 
 
 date_format = moment().format("DD/MM/YYYY HH:mm:ss");
@@ -192,7 +196,7 @@ var argvect = [
 			CreationDate : date_format
            	},
      	headers: {"Content-Type": "application/json"},
-        execute: {image : "./2001.jpg"}
+        execute: {image : "2001.jpg"}
         
      	}
 
@@ -200,15 +204,19 @@ var argvect = [
 ]; //END OF DATA
 
 
-function attach_image(image,id,rev){
+function attach_image(image, context){
 	var fs = require("fs");
 	var filename = image;
 	var data = fs.readFileSync(filename);
-	db.attachment.insert(id, image, data, 'image/jpg', { rev : rev }, function(err, body) {
-		        //if (!err)
-		          console.log(body);
-		      });
-	};
+	dbres.insert(context, function(err, body, header){
+		if (!err){	dbres.attachment.insert(body.id, image, data, 'image/jpg', { rev : body.rev },  function(err, body) {  
+		        	console.log(body);
+		           });
+		      }
+		else return;
+		
+	});
+};
 
 
 function execute_DB(argvect,i) {
@@ -220,7 +228,7 @@ function execute_DB(argvect,i) {
 	    db.insert(record.data, function(err, body, header){
 	    	console.log(body);
 	    	if (!err && record.execute ){
-	    		attach_image(record.execute.image, body.id, body.rev);
+	    		attach_image(record.execute.image, record.data);
 	    		console.log("attach image: ", record.execute.image);
 	    		}
 			execute_DB(argvect,i+1);

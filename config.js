@@ -5,6 +5,7 @@ var config = {
 				port  :  "8080",
 				CouchServer : "http://127.0.0.1:5984/",
 				DBname : "leztok_db",
+				DBresource : "leztok_db_resource",
 				Design_Query : "leztok_design",
 				api_domain : "leztokapp-leztok.rhcloud.com"
 		};
