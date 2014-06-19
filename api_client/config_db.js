@@ -191,20 +191,43 @@ var argvect = [
          	UserPosition:"undefined",
 			CreationDate : date_format
            	},
-     	headers: {"Content-Type": "application/json"}}
+     	headers: {"Content-Type": "application/json"},
+        execute: {image : "./2001.jpg"}
+        
+     	}
 
          	
 ]; //END OF DATA
+
+
+function attach_image(image,id,rev){
+	var fs = require("fs");
+	var filename = image;
+	var data = fs.readFileSync(filename);
+	db.attachment.insert(id, image, data, 'image/jpg', { rev : rev }, function(err, body) {
+		        //if (!err)
+		          console.log(body);
+		      });
+	};
+
 
 function execute_DB(argvect,i) {
 	console.log(i,argvect.length);
 	if (i > argvect.length-1) 	return;
 	else
-		argvect[i].data.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
-	    db.insert(argvect[i].data, function(err, body, header){
-			console.log(body);
+		record = argvect[i];
+		record.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
+	    db.insert(record.data, function(err, body, header){
+	    	console.log(body);
+	    	if (!err && record.execute ){
+	    		attach_image(record.execute.image, body.id, body.rev);
+	    		console.log("attach image: ", record.execute.image);
+	    		}
 			execute_DB(argvect,i+1);
-		});  
+			
+	    });
+	    
+	    
 		return;
 };
 
