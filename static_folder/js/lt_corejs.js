@@ -1,4 +1,5 @@
-/******* Views management *************************************/   
+/******* Views management *************************************/
+
 	var view_stack = [];
    var view_loader = '<div style="width:100px;height:100px;background-color:#ECF0F1;position:absolute;top:45px;right:0;bottom:0;left:0;margin:auto;border-radius:25px"> \
 							 	<img src="images/loader.GIF" style="position:absolute;top:0;right:0;bottom:0;left:0;margin:auto;"> \
