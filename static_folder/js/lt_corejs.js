@@ -55,6 +55,7 @@
                            									console.log("Error:" + json_list_item.head.error);
                            									if (json_list_item.head.error == null) {
                            									  console.log("Rows:" + json_list_item.data.rows.length);
+<<<<<<< HEAD
                            									  
                            									  if (content_feed != "") {
                            									  	 content_string = template.replace("@comment_titlediscussion","#" + json_list_item.data.rows[0].value.IdDiscussion);
@@ -68,6 +69,16 @@
                            									  		template_to_add = template.replace("@comment_username","#"+json_list_item.data.rows[i].value.IdUser);
                            									  		template_to_add = template_to_add.replace("@comment_txt",json_list_item.data.rows[i].value.Comment);
                            									  		//template_to_add = template_to_add.replace("@comment_nlike",json_list_item.data.rows[i].value.NumberLike);
+=======
+                           									  if (content_feed != "") {
+                           									  	 content_feed = content_feed.replace("");
+                           									  }
+                           									  for (i=0;i<json_list_item.data.rows.length;i++) {
+                           									  		template_to_add = template.replace("@discussion_title","#"+json_list_item.data.rows[i].value.Title);
+                           									  		template_to_add = template_to_add.replace("@discussion_ncomment",json_list_item.data.rows[i].value.NumberComments);
+                           									  		template_to_add = template_to_add.replace("@discussion_nmale",json_list_item.data.rows[i].value.NumberMale);
+                           									  		template_to_add = template_to_add.replace("@discussion_nfemale",json_list_item.data.rows[i].value.NumberFemale);
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
                            									  		content_string += template_to_add;
                            									  }
                            									  
@@ -95,7 +106,11 @@
 									  </div> \
 									  <!-- / (end) hashtag buzz dashboard --> \
 									  <div id="content-feed"><\div>',
+<<<<<<< HEAD
 						func_add_elements:'', // da utilizzare per l'aggiornamento della view in funzione di nuovi dati aggiunti alla fine 					  
+=======
+						func_add_elements:'',					  
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
     					content_feed:'<div class="panel panel-default" style="margin-top:5px"> \
   										  	<div class="panel-body"> \
 												<div class="media"> \
@@ -111,7 +126,11 @@
 												</div> \
   											</div> \
 										</div>',
+<<<<<<< HEAD
 						api:'http://leztokapp-leztok.rhcloud.com/api/query/comments' //'http://127.0.0.1:8080/api/query/comments'
+=======
+						api:'ile:///Users/kilroy/Documents/Project(s)/Project_LVB/comments.json' //'http://127.0.0.1:8080/api/query/comments'
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
     				},
     				{
     					title:"content-discussions", // Done
@@ -175,14 +194,22 @@
             							}); // <-- end ajax function
     								  },
     					template:'<div class="panel panel-default" style="margin-top:5px"> \
+<<<<<<< HEAD
   										<div class="panel-heading">@discussion_title <button class="btn btn-default btn-sm pull-right" id="@discussion_title" role-btn="move-to-comments"><i class="fa fa-chevron-right"></i></button></div> \
+=======
+  										<div class="panel-heading">@discussion_title <button class="btn btn-default btn-sm pull-right" href="#" id="@discussion_title" current_view="content-discussions" modal_view="content-feed"><i class="fa fa-chevron-right"></i></button></div> \
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
   											<div class="panel-body"> \
     											<i class="fa fa-comments" style="margin-right:5px"></i><small>@discussion_ncomment</small><i class="fa fa-female pull-right" style="margin-right:5px;color:#E74C3C"><small> @discussion_nfemale</small></i><i class="fa fa-male pull-right" style="margin-right:5px;color:#3498DB"><small> @discussion_nmale</small></i> \
   											</div> \
 									</div>',
 						func_add_elements:'',			
 						content_feed:'',
+<<<<<<< HEAD
 						api:'http://leztokapp-leztok.rhcloud.com/api/query/discussions'	
+=======
+						api:'file:///Users/kilroy/Documents/Project(s)/Project_LVB/discussions.json' //'http://127.0.0.1:8080/api/query/discussions'	
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
     				}
     			]
     	};		
@@ -221,6 +248,7 @@
 	
 	
 	$("#content").on("click","button",function(){
+<<<<<<< HEAD
 		role_btn = $(this).attr("role-btn");
 		switch (role_btn) {
 			case "move-to-comments":
@@ -232,6 +260,12 @@
 			default: return true;
 		}
 		
+=======
+		$('#content').transition({ scale: 0.0 }, function(){
+			console.log("ACTION: Changing view");
+			view_obj.show_view("content-feed",2);
+		});			
+>>>>>>> c8dd9da50a06facd3f980efcd66a4ce9152e176a
 	});
 		 
 /***************** Connect page management *****************************/

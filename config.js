@@ -9,14 +9,23 @@ var config = {
 				api_domain : "leztokapp-leztok.rhcloud.com"
 		};
 
-if (process.env.OPENSHIFT_NODEJS_IP)
-{
-	config.CouchServer = "https://hiveapp.iriscouch.com/";
-};
+console.log("OS IP  : ", process.env.OPENSHIFT_NODEJS_IP);
+console.log("OS PORT: ", process.env.OPENSHIFT_NODEJS_PORT);
+console.log("------");
 
-//Openshift connection
-config.ip_addr = process.env.OPENSHIFT_NODEJS_IP   || config.ip_addr;
-config.port    = process.env.OPENSHIFT_NODEJS_PORT || config.port;
 
+OS_ipaddress = process.env.OPENSHIFT_INTERNAL_IP || process.env.OPENSHIFT_NODEJS_IP;
+OS_port      = process.env.OPENSHIFT_INTERNAL_PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+if (typeof OS_ipaddress === "undefined") {
+	    //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
+        //  allows us to run/test the app locally.
+	    console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
+	 }
+else{
+		config.ip_addr = OS_ipaddress;
+        config.port    = OS_port;
+        config.CouchServer = "https://hiveapp.iriscouch.com:6984/";
+	};
 
 module.exports = config;
