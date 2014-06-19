@@ -44,8 +44,7 @@ var argvect = [
 					type : "User",
 					IdUser: "User2",
 					IdUserSN: 1,
-					FirstName: "Antonio",//execute_DB(argvect,0);
-
+					FirstName: "Antonio",
 					LastName:"Candela",
 					Mail:"candela.antoni@gmail.com",
 					Gender:"M",
@@ -115,6 +114,14 @@ var argvect = [
              	Media: "undefined",
              	IdDiscussion: "Discussion1",
              	IdUser: "User1",
+             	FirstName: "Francesco",
+				LastName:"Collovà",
+				Mail:"francesco.collova@gmail.com",
+				Gender:"M",
+				NumberOfDiscussion:1,
+				NumberOfComments:2,
+				NumberOfPlaces:1,
+				NumberOfReply:0,
              	UserPosition:"undefined",
 					CreationDate : date_format
                	},
@@ -129,6 +136,14 @@ var argvect = [
          	Media: "undefined",
          	IdDiscussion: "Discussion1",
          	IdUser:"User1",
+         	FirstName: "Francesco",
+			LastName:"Collovà",
+			Mail:"francesco.collova@gmail.com",
+			Gender:"M",
+			NumberOfDiscussion:1,
+			NumberOfComments:2,
+			NumberOfPlaces:1,
+			NumberOfReply:0,
          	UserPosition:"undefined",
 				CreationDate : date_format
            	},
@@ -143,6 +158,14 @@ var argvect = [
              	Media: "undefined",
              	IdDiscussion: "Discussion2",
              	IdUser: "User1",
+             	FirstName: "Francesco",
+				LastName:"Collovà",
+				Mail:"francesco.collova@gmail.com",
+				Gender:"M",
+				NumberOfDiscussion:1,
+				NumberOfComments:2,
+				NumberOfPlaces:1,
+				NumberOfReply:0,
              	UserPosition:"undefined",
 				CreationDate : date_format
                	},
@@ -157,6 +180,14 @@ var argvect = [
          	Media: "undefined",
          	IdDiscussion: "Discussion2",
          	IdUser:"User2",
+         	FirstName: "Antonio",
+			LastName:"Candela",
+			Mail:"candela.antoni@gmail.com",
+			Gender:"M",
+			NumberOfDiscussion:1,
+			NumberOfComments:2,
+			NumberOfPlaces:1,
+			NumberOfReply:0,
          	UserPosition:"undefined",
 			CreationDate : date_format
            	},
@@ -177,4 +208,4 @@ function execute_DB(argvect,i) {
 		return;
 };
 
-execute_DB(argvect,0);
+execute_DB(argvect,0); //execute_DB(argvect,0);
