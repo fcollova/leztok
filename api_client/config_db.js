@@ -1,6 +1,8 @@
 
 var moment = require('moment');
 var con = require('../config.js'); //Carica la configurazione
+var async = require('async');
+
 
 if (process.argv[2]){
 	console.log(process.argv[2]);
@@ -196,47 +198,68 @@ var argvect = [
 			CreationDate : date_format
            	},
      	headers: {"Content-Type": "application/json"},
-        execute: {image : "2001.jpg"}
+        execute: {imagefile : "2001.jpg"}
         
-     	}
+     	}	
+
 
          	
 ]; //END OF DATA
 
 
-function attach_image(image, context){
-	var fs = require("fs");
-	var filename = image;
-	var data = fs.readFileSync(filename);
-	dbres.insert(context, function(err, body, header){
-		if (!err){	dbres.attachment.insert(body.id, image, data, 'image/jpg', { rev : body.rev },  function(err, body) {  
-		        	console.log(body);
-		           });
-		      }
-		else return;
+function insert_resource(record){
+	
+	if (record.execute)
+	{
+		console.log("resource inserting");
+		async.waterfall([
+		                 function(callback){
+		                	 dbres.insert(record.data, function(err, body, header){
+		                		 if (!err){
+		                			 console.log("insert resource for: ", body);
+		                			 callback(null, body);}
+		                		 else return(err); 
+		                	 });},
+
+		                 function (res1,callback){
+		                 var fs = require("fs");
+						 var filename = record.execute.imagefile;
+						 var data = fs.readFileSync(filename);
+						 dbres.attachment.insert(res1.id, filename, data, 'image/jpg', { rev : res1.rev },  function(err, body) {  
+						        	console.log(body);
+						        	callback(body,res1,callback);
+						 });}
+		                ],
+		                function(err, status) { console.log(status);
+		                						return (status);}
+				   );
+	}
+	else return(null);
+	}
+
+								
+								
+								
+function insert_DB(record) {
 		
-	});
+	record.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
+	async.series([
+	              function(callback){
+	              //inserisce il record in leztok_db
+	              db.insert(record.data, function(err, body, header){
+	            	  if (!err){
+	            		  		console.log("insert ", body);
+	          	                callback(null, body);
+		            	  		}
+	            	  else callback(err);	});
+	              },
+	              function(callback){
+	            	  insert_resource(record);
+	            	  callback(null); }
+	              
+	              ], function(err, results){});
+	
 };
+	
 
-
-function execute_DB(argvect,i) {
-	console.log(i,argvect.length);
-	if (i > argvect.length-1) 	return;
-	else
-		record = argvect[i];
-		record.CreationDate = moment().format("DD/MM/YYYY HH:mm:ss");
-	    db.insert(record.data, function(err, body, header){
-	    	console.log(body);
-	    	if (!err && record.execute ){
-	    		attach_image(record.execute.image, record.data);
-	    		console.log("attach image: ", record.execute.image);
-	    		}
-			execute_DB(argvect,i+1);
-			
-	    });
-	    
-	    
-		return;
-};
-
-execute_DB(argvect,0); //execute_DB(argvect,0);
+async.map(argvect, insert_DB , function(err, results){} );
