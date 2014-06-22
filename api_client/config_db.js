@@ -136,7 +136,7 @@ var argvect = [
      	{data: {
      		_id : "Comment2",
      		type : "Comment",
-         	IdComment:"comment2",
+         	IdComment:"Comment2",
          	Comment: "Domani Vinceremo!!",
          	MediaType: "undefined",
          	Media: "undefined",
@@ -180,7 +180,7 @@ var argvect = [
      	{data: {
      		_id : "Comment4",
      		type : "Comment",
-         	IdComment:"comment4",
+         	IdComment:"Comment4",
          	Comment: "Domani Vinceremo!!",
          	MediaType: "image/jpg",
          	Media: "2001.jpg",
@@ -262,4 +262,4 @@ function insert_DB(record) {
 };
 	
 
-async.map(argvect, insert_DB , function(err, results){} );
+async.map(argvect, insert_DB , function(err, results){console.log( "Map Error" ); } );
