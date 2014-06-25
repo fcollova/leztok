@@ -21,6 +21,8 @@ var util    = require('util');
 //Couch Driver for URL router
 var Get_query_V1 = require('./lib/Get_query_V1');
 var Post_ID_V1 = require('./lib/Post_ID_V1');
+var Post_Comment_V1 = require('./lib/Post_Comment_V1');
+
 
 
 
@@ -70,7 +72,9 @@ server.use(restify.CORS());
 //			res.send(200 , msg_body_to_send);
 //			return next();
 //			}
-//		else{
+//		else{//server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
+//server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
+//
 //			msg_body_to_send = format_msg_api(body,err);
 //			res.send(200 , msg_body_to_send);
 //			//return next(err);
@@ -108,9 +112,12 @@ var PATH = '/api/insert/';
 //server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
 //server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
 //
-server.post({path: PATH + ':name', version: '1.0.0'}, Post_ID_V1);
+server.post({path: PATH + ':name', version: '1.0.0'}, Post_ID_V1);//server.get({path: PATH, version: '1.0.0'}, Get_list_ID_V1);
+//server.get({path: PATH + ':name', version: '1.0.0'}, Get_ID_V1);
+//
 
-
+var PATH = '/api/i_comment';
+server.post({path: PATH, version: '1.0.0'}, Post_Comment_V1);
 
 
 var VPATH = '/api/query/';
