@@ -2,7 +2,7 @@
 
 var config = {
 				ip_addr : "127.0.0.1",
-				port  :  "8080",
+				port  :  process.env.PORT || 5000, // "8080",
 				CouchServer : "http://127.0.0.1:5984/",
 				DBname : "leztok_db",
 				DBresource : "leztok_db_resource",
