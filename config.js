@@ -29,4 +29,9 @@ else{
         config.CouchServer = "https://hiveapp.iriscouch.com:6984/";
 	};
 
+if (process.argv[2]==="P"){
+	
+	config.CouchServer = "https://hiveapp.iriscouch.com:6984/";
+};	
+
 module.exports = config;
