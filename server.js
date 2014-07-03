@@ -131,7 +131,7 @@ server.get( /.*\..*/, restify.serveStatic({ directory: __dirname + '/static_fold
 //server.get(/\/.+/, restify.serveStatic({ directory: __dirname + '/static_folder'}));
 
 
-server.listen(con.port ,con.ip_addr, function(){
+server.listen(con.port , function(){
 
 	console.log('Current process directory is: ' + __dirname);
     console.log('%s listening at %s \n', server.name , server.url);
