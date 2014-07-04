@@ -31,7 +31,7 @@ else{
 
 if (process.argv[2]==="P"){
 	
-	config.CouchServer = "https://hiveapp.iriscouch.com:6984/";
+	config.CouchServer = "https://hiveapp.iriscouch.com/";
 };	
 
 module.exports = config;
