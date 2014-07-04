@@ -131,14 +131,14 @@ server.get( /.*\..*/, restify.serveStatic({ directory: __dirname + '/static_fold
 //server.get(/\/.+/, restify.serveStatic({ directory: __dirname + '/static_folder'}));
 
 
-server.listen(con.port , function(){
+server.listen(con.port , function(){     //con.ip_addr,
 
 	console.log('Current process directory is: ' + __dirname);
     console.log('%s listening at %s \n', server.name , server.url);
     console.log('Static Usage: ---> ' + server.url + '/lt_connect.html');
     //console.log('API Usage: ------> '+ server.url + '/api/Id');
     console.log('API Query Usage:-> ' + server.url + '/api/query/comments?key=Comment1');
-    console.log('API Query Usage:-> ' + server.url + 'POST  /api/insert/<_id>   <dati nel body: json>');
+    console.log('API Query Usage:-> ' + server.url + '/api/insert/<_id>   <dati nel body: json>');
 
     
 });
