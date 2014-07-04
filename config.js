@@ -31,7 +31,9 @@ else{
 
 if (process.argv[2]==="P"){
 	
-	config.CouchServer = "https://hiveapp.iriscouch.com/";
+	//config.CouchServer = "https://hiveapp.iriscouch.com/";
+	config.CouchServer = "https://leztok.couchappy.com/";
+
 };	
 
 module.exports = config;
