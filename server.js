@@ -22,6 +22,7 @@ var util    = require('util');
 var Get_query_V1 = require('./lib/Get_query_V1');
 var Post_ID_V1 = require('./lib/Post_ID_V1');
 var Post_Comment_V1 = require('./lib/Post_Comment_V1');
+var Post_New_Discussion_V1 = require('./lib/Post_New_Discussion_V1');
 
 
 
@@ -118,7 +119,8 @@ server.post({path: PATH + ':name', version: '1.0.0'}, Post_ID_V1);//server.get({
 
 var PATH = '/api/i_comment';
 server.post({path: PATH, version: '1.0.0'}, Post_Comment_V1);
-
+var PATH = '/api/i_discussion';
+server.post({path: PATH, version: '1.0.0'}, Post_New_Discussion_V1);
 
 var VPATH = '/api/query/';
 server.get({path: VPATH + ':name', version: '1.0.0'}, Get_query_V1);
