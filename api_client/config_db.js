@@ -30,7 +30,7 @@ var argvect = [
 //USERS
 			{data: {
 					_id:"User1",
-					type : "User",
+					Type : "User",
 					IdUser: "User1",
 					IdUserSN: 1,
 					FirstName: "Francesco",
@@ -47,7 +47,7 @@ var argvect = [
 
 				{data: {
 					_id:"User2",
-					type : "User",
+					Type : "User",
 					IdUser: "User2",
 					IdUserSN: 1,
 					FirstName: "Antonio",
@@ -66,7 +66,7 @@ var argvect = [
 				
 			{data: {
 				_id : "Category1",
-				type : "Category",
+				Type : "Category",
 				IdCategory: "Category1",
 				Description: "Startup",
 				NumberOfDiscussion: 1,
@@ -82,7 +82,7 @@ var argvect = [
             
          {data: {				
          		_id : "Discussion1",
-         		type : "Discussion",
+         		Type : "Discussion",
          		IdDiscussion : "Discussion1", 
          		Title : "La volta buona",
          		IdCategory: "Category1",
@@ -96,7 +96,7 @@ var argvect = [
          	
          {data: {				
      			_id : "Discussion2",
-     			type : "Discussion",
+     			Type : "Discussion",
      			IdDiscussion : "Discussion2", 
      			Title : "Startup Leztok",
      			IdCategory: "Category1",
@@ -113,7 +113,7 @@ var argvect = [
 
          {data: {
          		_id : "Comment1",
-         		type : "Comment",
+         		Type : "Comment",
              	IdComment:"Comment1",
              	Comment: "Oggi Vinceremo!!",
              	MediaType: "undefined",
@@ -135,7 +135,7 @@ var argvect = [
          	
      	{data: {
      		_id : "Comment2",
-     		type : "Comment",
+     		Type : "Comment",
          	IdComment:"Comment2",
          	Comment: "Domani Vinceremo!!",
          	MediaType: "undefined",
@@ -157,7 +157,7 @@ var argvect = [
          	
              {data: {
          		_id : "Comment3",
-         		type : "Comment",
+         		Type : "Comment",
              	IdComment:"Comment3",
              	Comment: "Oggi Vinceremo!!",
              	MediaType: "undefined",
@@ -179,7 +179,7 @@ var argvect = [
          	
      	{data: {
      		_id : "Comment4",
-     		type : "Comment",
+     		Type : "Comment",
          	IdComment:"Comment4",
          	Comment: "Domani Vinceremo!!",
          	MediaType: "image/jpg",
